@@ -1,12 +1,12 @@
-from .serializers import PostSerializer
+from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
-from .models import Post
+from .serializers import UserSerializer
 
 
-class PostViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
     def get_permissions(self):
         """
