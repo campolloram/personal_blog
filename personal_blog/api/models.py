@@ -26,3 +26,4 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = '_'.join([word for word in self.title.split(' ')])
+            self.status = 'Publish'
