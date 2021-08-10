@@ -4,7 +4,7 @@ const postItems = [
   {
     title: "Post Added by Node",
     body: "This the example of a post added using node",
-    completed: true
+    status: true
   }
 ];
 
@@ -47,7 +47,7 @@ class App extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
     const newItems = this.state.postList.filter(
-      (item) => item.completed == viewCompleted
+      (item) => item.status == viewCompleted
     );
 
     return newItems.map((item) => (
