@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'rest_framework.authtoken',
+    'accounts',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -48,8 +51,14 @@ CORS_ORIGIN_WHITELIST = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        
     ],
     'PAGE_SIZE': 100
 }
@@ -65,6 +74,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'personal_blog.urls'
+AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {

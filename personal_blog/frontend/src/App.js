@@ -1,20 +1,19 @@
 import React, { Component } from "react";
+import axios from "axios";
 
-const postItems = [
-  {
-    title: "Post Added by Node",
-    body: "This the example of a post added using node",
-    status: true
-  }
-];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewCompleted: false,
-      postList: postItems,
+      viewCompleted: true,
+      postList: [],
     };
+  }
+  componentDidMount(){
+    axios.get('localhost:8000/posts/')
+    .then(response => {this.setState({postList: response.data})} )
+    .catch(err => {console.log(err)})
   }
 
   displayCompleted = (status) => {
@@ -47,7 +46,7 @@ class App extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
     const newItems = this.state.postList.filter(
-      (item) => item.status == viewCompleted
+      (item) => item.status === viewCompleted
     );
 
     return newItems.map((item) => (

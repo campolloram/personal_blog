@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db import IntegrityError
+from django.conf import settings
 
-
+User = settings.AUTH_USER_MODEL
 
 STATUS = (
     (0,"Draft"),
