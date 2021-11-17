@@ -1,17 +1,39 @@
 version: '3'
 services:
   frontend:
-    build:
-      context: ./
-      dockerfile: ./frontend/Dockerfile
+    build: 
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    container_name: react
     ports:
-      - 0.0.0.0:3000:3000
+      - 3000:3000
     volumes:
       - ./frontend:/app
-
+    stdin_open: true
+    
   backend:
     build: ./backend
     ports:
       - 8000:8000
     volumes:
       - ./backend:/app
+    depends_on:
+      - database
+    restart: on-failure:10
+  
+
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=POSTGRES
+      - POSTGRES_DB=POSTGRES
+      - POSTGRES_PASSWORD=POSTGRES
+    # env_file:
+    #   - ./backend/.env
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+
+volumes:
+  pgdata:

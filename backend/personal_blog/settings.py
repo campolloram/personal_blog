@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
 
 
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'corsheaders',
     'rest_framework.authtoken',
     'accounts',
 ]
@@ -64,6 +66,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,6 +74,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://0.0.0.0:3000'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    'http://0.0.0.0:3000'
 ]
 
 ROOT_URLCONF = 'personal_blog.urls'
@@ -93,15 +106,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'personal_blog.wsgi.application'
-
+DJANGO_SETTINGS_MODULE = 'personal_blog.settings'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'POSTGRES', # os.getenv('POSTGRES_DB'),
+        'USER': 'POSTGRES', # os.getenv('POSTGRES_USER'),
+        'PASSWORD': 'POSTGRES', # os.getenv('POSTGRES_PASSWORD'),
+        'HOST': 'database',
+        'PORT': '5432',
     }
 }
 
