@@ -29,11 +29,13 @@ class Post(models.Model):
         slug = slugify(self.title)
         try:
             if not self.pk:
+                print('Inside if')
                 self.slug = slug
                 self.status = 1
                 return super(Post, self).save(*args, **kwargs)
 
         except IntegrityError:
+            print('Inside Integrity Error')
             c = 1
             while True:
                 try:
@@ -41,9 +43,11 @@ class Post(models.Model):
                     c += 1
 
                 except Post.DoesNotExist:
+                    print('Inside does not exist')
                     self.slug = slug + f'_{c}'
                     self.status = 1
                     break
 
-        finally:
+        except Exception as e:
+            print(e)
             return super(Post, self).save(*args, **kwargs)
