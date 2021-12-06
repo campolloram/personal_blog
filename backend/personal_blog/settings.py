@@ -88,6 +88,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 ROOT_URLCONF = 'personal_blog.urls'
 AUTH_USER_MODEL = 'accounts.User'
+REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER':'accounts.serializers.UserSerializer'}
 
 TEMPLATES = [
     {

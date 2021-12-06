@@ -11,7 +11,8 @@ RUN /opt/venv/bin/pip3 install -r requirements.txt
 
 COPY . .
 ENV DJANGO_SECRET_KEY='j#_lxuvo8q@f**nwh%!sw&7nfy+2+9a)o%1s9@s*&h2lk7mg%9'
-ENV DEBUG=False
+ENV PRODUCTION='TRUE'
+ENV DEBUG=True
 
 EXPOSE 8000
 RUN chmod +x ./start.sh
