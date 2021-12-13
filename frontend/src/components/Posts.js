@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post.js';
 
+
 const postsList = [
     {
         id: 1,
@@ -25,9 +26,8 @@ const postsList = [
 function Posts() {
     return (
         <div>
-            {postsList.map((post) => {
-                const {id, title, date_created, body} = post;
-                return <Post key={id} post={post}></Post>;
+            {postsList.map((_post) => {
+                return <Post key={_post.id} post={_post}></Post>;
             })}
         </div>
     )

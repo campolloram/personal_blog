@@ -31,6 +31,7 @@ router.register(r'posts', PostViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
      path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'))
 ]

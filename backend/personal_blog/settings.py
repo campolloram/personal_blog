@@ -51,15 +51,12 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
         
     ],
     'PAGE_SIZE': 100
@@ -70,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -81,10 +77,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0:3000'
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    'http://0.0.0.0:3000'
-]
 
 ROOT_URLCONF = 'personal_blog.urls'
 AUTH_USER_MODEL = 'accounts.User'
@@ -168,4 +160,3 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
