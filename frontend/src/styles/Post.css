@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+.PostTitle {
+  font-size: 3vw;
+  font-family: 'Monoton', cursive;
+  white-space: pre-line;
+  color: black;
+  
+}
+
+.PostDiv{
+
+  padding-left: 10%;
+  flex: auto;
+  border: .1vh solid #000000;
+  margin-left: 10vh;
+  margin-right: 50vh;
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+  align-items: center;
+  background-color: ghostwhite;
+}
+
